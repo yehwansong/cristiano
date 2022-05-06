@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8">
+<meta 
+     name='viewport' 
+     content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' 
+/>
+<script
+src="https://code.jquery.com/jquery-3.4.1.js"
+integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+crossorigin="anonymous"></script>
+<script src="perfect-scrollbar.js"></script>
+<script src="jquery.waitforimages.js"></script>
+<link rel="stylesheet" href="https://use.typekit.net/ryv0hyv.css">
+<style type="text/css">
+	*{margin:0;
+		padding: 0;
+		box-sizing: border-box;
+		font-size: 0;
+
+font-family: neuzeit-grotesk, sans-serif;
+
+font-weight: 400;
+
+font-style: normal;
+	}
+	body,html{
+		width: 100vw;
+		height: 100%;
+		overflow:hidden;
+	}
+	body{
+    background: linear-gradient(#b9b9b9 20%,#0a0a0a);
+	}
+	.right img{
+		transform: rotate();
+	}
+	.cat{
+		width: 20vw !important;
+		position: fixed;
+		height: 100vh;
+		top: 45vw;
+		transform: translateX(-50%);
+	}
+	.elem{
+	    width: 50%;
+	    position: absolute;
+	    overflow-y: hidden;
+	    background: #8c8c8c6b;
+	    box-shadow: inset 0vh 0vh 1vh black, 10vh 10vh 1vh #5858586b;
+	}
+	.left{
+		left: 0;
+		height: 100vh;
+	}
+	.right{
+		right: 0;
+		height: 100vh;
+	}
+	.bottom_left{
+	    transform: rotate(45deg);
+	    transform-origin: left top;
+	    left: 0;
+	    top: calc(25vw - 10vw);
+	    width: 70.7%;
+	    box-shadow: inset 0vh 0vh 1vh black, -10vh 10vh 1vh #5858586b;
+		height: 100vh;
+	}
+	.bottom_left>img{
+		top: -100%
+	}
+	.bottom_right{
+	    transform: rotate(-45deg);
+	    transform-origin: right top;
+	    right: 0;
+	    top: calc(25vw - 10vw);
+	    width: 70.7%;
+	    box-shadow: inset 0vh 0vh 1vh black, 10vh 10vh 1vh #5858586b;
+		height: 100vh;
+	}
+	.bottom_right>img{
+		top: -100%
+	}
+	.top_left{
+	    transform: rotate(45deg) translateY(-56.6vw);
+	    height: 55vw;
+	    transform-origin: left top;
+	    left: 0;
+	    top: calc(25vw - 10vw);
+	    width: 70.7%;
+	    box-shadow: inset 0vh 0vh 1vh black, 10vh 10vh 1vh #5858586b;
+	}
+	.top_right{
+    	transform: rotate(-45deg) translateY(-56.6vw);
+    	height: 55vw;
+    	transform-origin: right top;
+    	right: 0;
+    	top: calc(25vw - 10vw);
+    	width: 70.7%;
+	    box-shadow: inset 0vh 0vh 1vh black, -10vh 10vh 1vh #5858586b;
+	}
+	img{
+		width: 100%
+	}
+	.right{
+	    transform: skewY(-45deg);
+	    transform-origin: left;
+	}
+	.left{
+	    transform: skewY(45deg);
+	    transform-origin: right;
+	}
+.cat_1{
+    left: 80vw;
+    z-index: 10;
+    width: 20vw;
+    top: 20vw;
+}
+.cat_2{
+    left: 50vw;
+    width: 23vw;
+    height: 40vw;
+    z-index: 13;
+}
+.cat_3{
+    left: 20vw;
+    width: 16vw;
+    height: 53vh;
+    z-index: 8;
+    top: 20vw;
+}
+.cat_4{
+    left: 4vw;
+    width: 28vw;
+    height: 53vh;
+    z-index: 8;
+}
+.scroll_wrapper{
+	width: 100vw;
+	height: 100%;
+	overflow-y: hidden;
+	display: flex;
+	z-index: 0
+}
+.scroll{
+	position: relative; 
+	/*background: linear-gradient(to bottom, black, white);*/
+	height: 10000px;
+	width: 100%
+}
+.scroll_wrapper{
+	width: 100vw;
+    -webkit-overflow-scrolling: touch;  
+    height: 100%;
+    position: absolute;
+    z-index: 100000;
+}
+.cloned{
+    z-index: 1000000 !important;
+    pointer-events: none;
+}
+.cloned .elem{
+    z-index: 1000000 !important;
+    pointer-events: all !important;
+    cursor: pointer;
+    color: white;
+    font-size: 1vw;
+    text-transform: uppercase;
+    mix-blend-mode: color-dodge;
+}
+.top{
+	/*background:red;*/
+    height: 10vw;
+    transform: translateY(-150%) translateX(50%) rotate(45deg) scale(1.414);
+    box-shadow: inset 0vh 0vh 0.5vh white
+}
+.cloned .top{
+	background:none;
+}
+.cloned .top:hover{
+    background: #8c8c8ce8;
+}
+.text{
+    /* transform: rotate(45deg) translateY(-55vw); */
+    /* height: 55vw; */
+    transform-origin: left top;
+    left: -20vw;
+    top: 0;
+    width: 24vw;
+    position: absolute;
+    color: black;
+    font-size: 2vh;
+    opacity: 1;
+    z-index: 10000;
+    background: white;
+    padding: 1vw;
+}
+.dia_1{
+    width: 5vw;
+    transform: rotate(45deg);
+    transform-origin: top left;
+    left: 70vw;
+    position: absolute;
+    top: 0px;
+    filter: invert(1);
+    z-index: 10
+}
+.dia_1 img{
+    transform: rotate(-45deg);
+    margin-bottom: 10vw;
+    box-shadow: -3vw 3vw 1vw #656565, 0vw 0vw 0.5vw #005aff;
+}
+.dia_2{
+    width: 7.5vw;
+    transform: rotate(-45deg);
+    transform-origin: top left;
+    left: 20vw;
+    position: absolute;
+    top: 0px;
+    filter: invert(1);
+}
+.dia_2 img{
+    transform: rotate(-45deg);
+    margin-bottom: 10vw;
+    box-shadow: -3vw 3vw 1vw #656565, 0vw 0vw 0.5vw #ff0000;
+}
+.popup{
+    z-index: 10000000;
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow:hidden;
+    background: black;
+    display: none;
+    box-sizing: border-box;
+}.popup_title{
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    position: relative;
+    color: white;
+    display: block;
+    /* height: 30vh; */
+    font-size: 20px;
+    line-height: 1.1;
+    text-align: center;
+    text-transform: uppercase;
+    display: inline-block;
+}
+.popup_text{
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    position: relative;
+    color: white;
+    display: block;
+    /* height: 30vh; */
+    font-size: 20px;
+    line-height: 1.1;
+    margin-bottom: 10px;
+}
+.popup_img img{
+	margin-bottom: 10vh;
+	width: 100%;
+	left: 50%;
+	transform: translateX(-50%) !important;
+	position: relative;
+	display: block;
+}
+@media (min-aspect-ratio: 1/1) {
+.popup_img img{
+	height: 90vh;
+	margin-bottom: 10vh;
+	width: auto;
+  }
+}
+
+.popup_close{
+    position: fixed;
+    right: 5px;
+    top: 5px;
+    display: block;
+    z-index: 10000000000;
+    /* display: none; */
+    background: white;
+    box-shadow: 0px 0px 0px 5px white;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+.popup_close:hover{
+	filter: invert(1);
+}
+.about{
+	position: fixed;
+    z-index: 1000000;
+	width: 100vw;
+	height: 100vh;
+	background-image: url(img/about-01.png);
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: top;
+}
+.about_btn{
+	position: fixed;
+    z-index: 1000000;
+	width: 10vw;
+	height: 100vh;
+	right: 0;
+	background-image: url(img/about-02.png);
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: top;
+	display: none;
+	cursor: pointer;
+}
+</style>
+</head>
+<body>
+	<script type="text/javascript">
+		var text = [
+		'',
+		'',
+		''
+		]
+		$(document).ready(function(){
+			var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+			var imagearray = [
+					"<img class='wait' src='image/m_img.jpg'>",
+					"<img class='wait' src='image/p_img1.JPG'>",
+					"<img class='wait' src='image/p_img2.JPG'>",
+					"<img class='wait' src='image/p_img3.JPG'>",
+					"<img class='wait' src='image/p_img4.JPG'>",
+					"<img class='wait' src='image/p_img5.JPG'>",
+					"<img class='wait' src='image/p_img6.JPG'>",
+					"<img class='wait' src='image/p_img7.JPG'>",
+					"<img class='wait' src='image/p_img8.JPG'>",
+					"<img class='wait' src='image/p_img9.JPG'>",
+					"<img class='wait' src='image/p_img10.JPG'>",
+					"<img class='wait' src='image/p_img11.JPG'>",
+					"<img class='wait' src='image/z_img1.jpg'>",
+					"<img class='wait' src='image/z_img2.png'>",
+					"<img class='wait' src='image/z_img3.png'>",
+					"<img class='wait' src='image/z_img4.png'>",
+					"<img class='wait' src='image/z_img5.png'>",
+					"<img class='wait' src='image/z_img6.png'>",
+					"<img class='wait' src='image/z_img7.png'>",
+					"<img class='wait' src='image/z_img8.png'>",
+					"<img class='wait' src='image/z_img9.png'>",
+					"<img class='wait' src='image/z_img10.png'>",
+					"<img class='wait' src='image/z_img11.png'>",
+					"<img class='wait' src='image/z_img12.png'>",
+					"<img class='wait' src='image/z_img13.png'>",
+					"<img class='wait' src='image/z_img14.png'>",
+					"<img class='wait' src='image/z_img15.png'>",
+					"<img class='wait' src='image/z_img16.png'>",
+					"<img class='wait' src='image/z_img17.jpg'>",
+					"<img class='wait' src='image/z_img18.jpg'>",
+					"<img class='wait' src='image/z_img19.jpg'>",
+					"<img class='wait' src='image/z_img20.jpg'>",
+					"<img class='wait' src='image/z_img21.jpg'>",
+					"<img class='wait' src='image/z_img22.jpg'>",
+					"<img class='wait' src='image/z_img23.jpg'>",
+					"<img class='wait' src='image/z_img24.jpg'>",
+					"<img class='wait' src='image/z_img25.jpg'>",
+					"<img class='wait' src='image/z_img26.jpg'>",
+					"<img class='wait' src='image/z_img27.jpg'>",
+					"<img class='wait' src='image/z_img28.jpg'>",
+					"<img class='wait' src='image/z_img29.jpg'>",
+					"<img class='wait' src='image/z_img30.jpg'>",
+					"<img class='wait' src='image/z_img31.jpg'>",
+					"<img class='wait' src='image/z_img32.jpg'>"
+			]
+			var imagearray1
+			var imagearray2
+			var imagearray3
+			imagearray = shuffle(imagearray)
+			for (var i = imagearray.length - 1; i >= 0; i--) {
+					imagearray1 = imagearray1+' '+imagearray[i]
+				if(i == 0){
+					$('.cat_1.original').find('.elem.top').append(imagearray1)
+					$('.dia_1').append(imagearray1)
+				}
+			}
+			imagearray = shuffle(imagearray)
+			for (var i = imagearray.length - 1; i >= 0; i--) {
+					imagearray2 = imagearray2+' '+imagearray[i]
+				if(i == 0){
+					$('.cat_2.original').find('.elem.top').append(imagearray2)
+					$('.dia_2').append(imagearray2)
+				}
+			}
+			imagearray = shuffle(imagearray)
+			for (var i = imagearray.length - 1; i >= 0; i--) {
+					imagearray3 = imagearray3+' '+imagearray[i]
+				if(i == 0){
+					$('.cat_3.original').find('.elem.top').append(imagearray3)
+				}
+			}
+			$('.wait').waitForImages().done(function() {
+				$('.cat_1.original').find('.elem.top').append($('.cat_1.original').find('.elem.top').find('.wait').clone())
+				$('.cat_2.original').find('.elem.top').append($('.cat_2.original').find('.elem.top').find('.wait').clone())
+				$('.cat_3.original').find('.elem.top').append($('.cat_3.original').find('.elem.top').find('.wait').clone())
+				$('.cat_1.original').find('.elem').not('.elem.top').append($('.cat_1.original').find('.elem.top').find('.wait').clone())
+				$('.cat_2.original').find('.elem').not('.elem.top').append($('.cat_2.original').find('.elem.top').find('.wait').clone())
+				$('.cat_3.original').find('.elem').not('.elem.top').append($('.cat_3.original').find('.elem.top').find('.wait').clone())
+				if (!isMobile) {
+					$('.scroll_wrapper').perfectScrollbar();
+				}else{
+					$('.scroll_wrapper').css({'overflow-y':'scroll'})
+				}
+				$('.scroll_wrapper').scroll(function(){
+					if (!isMobile) {
+						var scrollamount = parseInt($('.ps-scrollbar-y-rail').css('top').split('px')[0],10)
+					}else{
+						var scrollamount = $('.scroll_wrapper').scrollTop()/2
+					}
+					$('.cat_1 .elem>img').css({'transform':'translateY('+-1*(scrollamount%($('.cat_1.original .elem.left').outerHeight()/2)) +'px)'})
+					$('.cat_2 .elem>img').css({'transform':'translateY('+-1*(scrollamount%($('.cat_2 .elem.left').outerHeight()/2)) +'px)'})
+					$('.cat_3 .elem>img').css({'transform':'translateY('+-1*(scrollamount%($('.cat_3.original .elem.left').outerHeight()/2)) +'px)'})
+					$('.dia_1').css({'transform':'rotate(45deg) translateY('+-1*(scrollamount%$('.dia_1').outerHeight()) +'px)'})
+					$('.dia_2').css({'transform':'rotate(-45deg) translateY('+-1*(scrollamount%$('.dia_2').outerHeight()) +'px)'})
+				})
+			});
+			$('.cloned').find('.elem.top').click(function(){
+				if (!isMobile) {
+				$('.popup').perfectScrollbar();
+				}else{
+					$('.popup').css({'overflow-y':'scroll'})
+				}
+				$('.popup').fadeIn(300)
+				var category = $(this).parent().attr('class').split('cat_')[1].split(' ')[0]
+				$('.popup_title').text($(this).text());
+				$('.popup_text').html(text[category-1]);
+				$('.original.cat_'+category).find('.left').children().each(function(index){
+					if(index<$('.original.cat_'+category).find('.left').children().length/2){
+										$('.popup_img').append($(this).clone())}
+				})
+			})
+			$('.popup_close').click(function(){
+				$('.popup').fadeOut(300)
+				$('.popup_title').text('');
+				$('.popup_text').html('');
+				$('.popup_img').empty()
+			})
+			$('.about_btn').click(function(){
+				$('.about').show()
+				$('.about_btn').hide()
+			})
+			$('.about').click(function(){
+				$('.about').hide()
+				$('.about_btn').show()
+			})
+			function shuffle(array) {
+				let currentIndex = array.length,  randomIndex;
+
+				// While there remain elements to shuffle.
+				while (currentIndex != 0) {
+
+				// Pick a remaining element.
+				randomIndex = Math.floor(Math.random() * currentIndex);
+				currentIndex--;
+
+				// And swap it with the current element.
+				[array[currentIndex], array[randomIndex]] = [
+					array[randomIndex], array[currentIndex]];
+				}
+
+				return array;
+			}
+			
+		})
+	</script>
+	<div class="about"></div>
+	<div class="about_btn"></div>
+	<div class="scroll_wrapper">
+		<div class="scroll"></div>
+	</div>
+	<div class="dia_2">
+	</div>
+	<div class="cat cat_1 original">
+		<div class="elem top"></div>
+		<div class="elem top_left"></div>
+		<div class="elem top_right"></div>
+		<div class="elem left"></div>
+		<div class="elem bottom_left"></div>
+		<div class="elem right"></div>
+		<div class="elem bottom_right"></div>
+	</div>
+	<div class="cat cat_2 original">
+		<div class="elem top"></div>
+		<div class="elem left"></div>
+		<div class="elem bottom_left"></div>
+		<div class="elem right"></div>
+		<div class="elem bottom_right"></div>
+	</div>
+	<div class="cat cat_3 original">
+		<div class="elem top"></div>
+		<div class="elem top_left"></div>
+		<div class="elem top_right"></div>
+		<div class="elem left"></div>
+		<div class="elem bottom_left"></div>
+		<div class="elem right"></div>
+		<div class="elem bottom_right"></div>
+	</div>
+	<div class="cat cat_1 cloned">
+		<div class="elem top"></div>
+	</div>
+	<div class="cat cat_2 cloned">
+		<div class="elem top"></div>
+	</div>
+	<div class="cat cat_3 cloned">
+		<div class="elem top"></div>
+	</div>
+	<div class="dia_1">
+	</div>
+	<div class="popup">
+		<img src="img/close.png" class="popup_close">
+		<div class="popup_title"></div>
+		<div class="popup_text"></div>
+		<div class="popup_img"></div>
+	</div>
+</body>
+</html>

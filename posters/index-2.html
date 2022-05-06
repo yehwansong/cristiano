@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content = "width = device-width, initial-scale = 1.0, minimum-scale = 1, maximum-scale = 1, user-scalable = no" />
+  <meta name="apple-mobile-web-app-title" content="onlyWebPro" />
+
+<style>
+    *{
+        margin:0;
+        padding:0;
+    }
+</style>
+<script type="text/javascript" src="matter.js"></script>
+</head>
+
+<body>
+    <script type="text/javascript">
+        
+document.addEventListener('touchmove', function(e) {
+    e.preventDefault();
+}, { passive: false });
+    </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+      var Engine = Matter.Engine,
+        Render = Matter.Render,
+        Runner = Matter.Runner,
+        Composites = Matter.Composites,
+        Common = Matter.Common,
+        MouseConstraint = Matter.MouseConstraint,
+        Mouse = Matter.Mouse,
+        World = Matter.World,
+        Bodies = Matter.Bodies,
+        Body = Matter.Body;
+        var ex = 0,
+            ey = 0
+
+    // create engine
+    var engine = Engine.create(),
+        world = engine.world;
+    var w = window.innerWidth, h = window.innerHeight
+    // create renderer
+    var render = Render.create({
+        element: document.body,
+        engine: engine,
+        options: {
+            width: w,
+            height: h,
+    wireframes: false,
+            // showAngleIndicator: true,
+        }
+    });
+
+    Render.run(render);
+
+    // create runner
+    var runner = Runner.create();
+    Runner.run(runner, engine);
+    var blocks = []
+    // add bodiesa
+    for (var j = 0; j < 4; j++) {
+        for (var i = 0; i < 30; i++) {
+                 blocks.push(Bodies.rectangle((w/4)*j+(w/8), (w/30)*i, w/4, w/30,{
+                    render: {
+                        sprite: {
+                        texture: 'pic/scan22/'+(4*i + j + 1)+'.png' ,
+                        xScale: w/700,
+                        yScale: w/700// set texture here'
+                        }
+                    }
+                }
+                )
+            )
+            World.add(world,blocks[blocks.length-1])
+        }
+    }
+$(document).ready(function(){
+    console.log(ex)
+    globalID = requestAnimationFrame(movecursor);
+            ex = 0,
+            ey = 0
+})
+
+
+    // if(e.type == 'touchstart' || e.type == 'touchmove' || e.type == 'touchend' || e.type == 'touchcancel'){
+    //     var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
+    //     ex = touch.pageX;
+    //     ey = touch.pageY;
+    // } else if (e.type == 'mousedown' || e.type == 'mouseup' || e.type == 'mousemove' || e.type == 'mouseover'|| e.type=='mouseout' || e.type=='mouseenter' || e.type=='mouseleave') {
+    //     ex = e.clientX;
+    //     ey = e.clientY;
+    // }
+
+$('body').on('mousedown touchstart', function(e){
+    engine.world.gravity.y = -1;
+    // World.gravity.y = -1;
+})
+$('body').on('mousemove touchmove', function(e){
+    engine.world.gravity.y = 1;
+})
+$('body').on('mouseup touchend', function(e){
+    engine.world.gravity.y = 1;
+})
+  // a little verbose but...
+var pointerEventToXY = function(e){
+      var out = {x:0, y:0};
+      if(e.type == 'touchstart' || e.type == 'touchmove' || e.type == 'touchend' || e.type == 'touchcancel'){
+        var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
+        ex = ex + (touch.pageX - ex)/30;
+        ey = ey + (touch.pageY - ey)/30;
+      } else if (e.type == 'mousedown' || e.type == 'mouseup' || e.type == 'mousemove' || e.type == 'mouseover'|| e.type=='mouseout' || e.type=='mouseenter' || e.type=='mouseleave') {
+        ex = ex + (e.pageX - ex)/30;
+        ey = ey + (e.pageY - ey)/30;
+      }
+      return out;
+};
+var cursor = Bodies.circle(0, (h+w), w/4, { isStatic: true })
+function movecursor() {
+    // for (var i = blocks.length - 1; i >= 0; i--) {
+    //      Body.setPosition(blocks[i], { x: (w/4)*Math.floor(i/30) +w/8, y: blocks[i].position.y })
+    // }
+    // globalID = requestAnimationFrame(movecursor);
+        // Body.setPosition(cursor, { x: ex, y: ey }) 
+}
+    World.add(world, cursor)
+    World.add(world, [
+        // walls
+        Bodies.rectangle(-25, h/2, 50, h, { isStatic: true }),
+        Bodies.rectangle(w+25, h/2, 50, h, { isStatic: true }),
+        Bodies.rectangle(w/2, -25, w, 50, { isStatic: true }),
+        Bodies.rectangle(w/2, h+25, w, 50, { isStatic: true })
+    ]);
+
+    // add mouse control
+    var mouse = Mouse.create(render.canvas),
+        mouseConstraint = MouseConstraint.create(engine, {
+            mouse: mouse,
+            constraint: {
+                stiffness: 0.2,
+                render: {
+                    visible: false
+                }
+            }
+        });
+
+    World.add(world, mouseConstraint);
+
+    // keep the mouse in sync with rendering
+    render.mouse = mouse;
+</script>
+</body>
+</html>

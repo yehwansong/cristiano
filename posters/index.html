@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content = "width = device-width, initial-scale = 1.0, minimum-scale = 1, maximum-scale = 1, user-scalable = no" />
+  <meta name="apple-mobile-web-app-title" content="onlyWebPro" />
+
+<style>
+    *{
+        margin:0;
+        padding:0;
+    }
+    body,html{
+        height: 100%;
+        width: 100vw;
+        background: black;
+        pointer-events: none;
+
+    }
+    .face{
+        background-size: 100% 100%;
+        width: 100%;
+        float: left;
+min-height: 2.5vw;
+background-size: 25vw;
+background-position: left top;
+position: relative;
+
+    }
+    .grad_top{
+        z-index: 100000;
+        position: absolute;
+        height: 8vh;
+        width: 100%;
+        opacity: 0.5;
+        pointer-events: none;
+    }
+    .face_subwrap_l .grad_top{
+    background: linear-gradient(#f21601 ,transparent);
+    }
+    .face_subwrap_r .grad_top{
+        background: linear-gradient(#00b7eb ,transparent)
+    }
+    .face_wrap{
+        overflow: visible;
+    }
+    .face_subwrap{
+    position: relative;
+        width: 50vw;
+        float: left;
+        transform-origin: top;
+        transition: transform 0.3s
+    }
+    .face_1,
+    .face_5{
+        height: 23.323vw
+    }
+    .face_2,
+    .face_6{
+        height: 25.4024vw;
+        margin-bottom: -3.7vw;
+        z-index: 100;
+        min-height: 6.2vw}
+    .face_3,
+    .face_7{
+        transform-origin: right top;
+        height: 0;
+        min-height: 0
+    }
+    .face_4,
+    .face_8{
+        height: 20.7378vw;
+    }
+    .face_5{
+        font-size: 0
+    }
+    .face_5 img{
+        width: 100%;
+        height: 100%
+    }
+    .face_8.animate,
+    .face_4.animate{
+        animation: bounce 0.8s;
+    }
+    .face_7.animate,
+    .face_3.animate{
+        height: 10vh !important;
+        margin-bottom: -10vh !important;
+        z-index: -1
+    }
+    .face_4.face_l,
+    .face_8.face_l,
+    .face_7.face_l,
+    .face_3.face_l{
+        background-image: url(pic/background-l.jpg);
+    }
+    .face_4.face_r,
+    .face_8.face_r,
+    .face_7.face_r,
+    .face_3.face_r{
+        background-image: url(pic/background-r.jpg);
+    }
+    .face_5{
+        min-height: 10px;
+        transform-origin: right bottom;
+    }
+    .face_r{
+        background-position: -50vw top
+    }
+    .face_3{
+        z-index: 15
+    }
+    .face_4{
+        z-index: 10;
+        /*box-shadow: 0vh 0vh 10vh #f21601;*/
+    }
+    .face_4.face_l{
+        z-index: 10;
+        /*box-shadow: 0vh 0vh 10vh #00b7eb;*/
+    }
+@keyframes bounce {
+  0% {
+    transform:translateY(100%);
+  }
+  5% {
+    transform:translateY(100%);
+  }
+  15% {
+    transform:translateY(0);
+  }
+  30% {
+    transform:translateY(50%);
+  }
+  40% {
+    transform:translateY(0%);
+  }
+  50% {
+    transform:translateY(30%);
+  }
+  70% {
+    transform:translateY(0%);
+  }
+  80% {
+    transform:translateY(20%);
+  }
+  90% {
+    transform:translateY(0%);
+  }
+  95% {
+    transform:translateY(10%);
+  }
+  97% {
+    transform:translateY(0%);
+  }
+  99% {
+    transform:translateY(5%);
+  }
+  100% {
+    transform:translateY(0);
+  }
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="jquery.easing.min.js"></script>
+</head>
+
+<body>
+    <script type="text/javascript">
+        
+document.addEventListener('touchmove', function(e) {
+    e.preventDefault();
+}, { passive: false });
+    </script>
+<script type="text/javascript">
+    $.easing.easeInBounce = function (x, t, b, c, d) {
+        return c - $.easing.easeOutBounce (x, d-t, 0, c, d) + b;
+    };
+    $.easing.easeOutBounce = function (x, t, b, c, d) {
+        if ((t/=d) <    (1/2.75)) {
+            return c*(7.5625*t*t) + b;
+        } else if (t <  (2/2.75)) {
+            return c*(7.5625*(t-=(1.5/2.75))*t + .75) + b;
+        } else if (t <  (2.5/2.75)) {
+            return c*(7.5625*(t-=(2.25/2.75))*t + .9375) + b;
+        } else {
+            return c*(7.5625*(t-=(2.625/2.75))*t + .984375) + b;
+        }
+    };
+
+    $(document).ready(function(){
+        var h = window.innerHeight
+        var w = window.innerWidth
+        var ex,ey
+        var init = [0,0]
+        var org_s_1_hei
+        var org_s_2_hei
+        var org_s_3_hei
+        var org_s_4_hei
+        var org_s_5_hei
+        var org_s_6_hei
+        var org_s_7_hei
+        var org_s_8_hei
+        var org_s_1_pos
+        var org_s_2_pos
+        var org_s_3_pos
+        var org_s_4_pos
+        var org_s_5_pos
+        var org_s_6_pos
+        var org_s_7_pos
+        var org_s_8_pos
+        start_in()
+        var a = 0
+        var start
+        var ratio_r = 1
+        var ratio_l = 1
+        function start_in(){
+            console.log('hl;ekj')
+            org_s_1_hei = $('.face_1').outerHeight()
+            org_s_2_hei = $('.face_2').outerHeight()
+            org_s_3_hei = $('.face_3').outerHeight()
+            org_s_4_hei = $('.face_4').outerHeight()
+            org_s_5_hei = $('.face_5').outerHeight()
+            org_s_6_hei = $('.face_6').outerHeight()
+            org_s_7_hei = $('.face_7').outerHeight()
+            org_s_8_hei = $('.face_8').outerHeight()
+            org_s_1_pos = $('.face_1').offset().top+ $('.face_1').outerHeight()
+            org_s_2_pos = $('.face_2').offset().top+ $('.face_2').outerHeight()
+            org_s_3_pos = $('.face_3').offset().top+ $('.face_3').outerHeight()
+            org_s_4_pos = $('.face_4').offset().top+ $('.face_4').outerHeight()
+            org_s_5_pos = $('.face_5').offset().top+ $('.face_5').outerHeight()
+            org_s_6_pos = $('.face_6').offset().top+ $('.face_6').outerHeight()
+            org_s_7_pos = $('.face_7').offset().top+ $('.face_7').outerHeight()
+            org_s_8_pos = $('.face_8').offset().top+ $('.face_8').outerHeight()
+            console.log(org_s_1_hei)
+            console.log(org_s_2_hei)
+            console.log(org_s_3_hei)
+            console.log(org_s_4_hei)
+            console.log(org_s_5_hei)
+            console.log(org_s_6_hei)
+            console.log(org_s_7_hei)
+            console.log(org_s_8_hei)
+            console.log(org_s_1_pos)
+            console.log(org_s_2_pos)
+            console.log(org_s_3_pos)
+            console.log(org_s_4_pos)
+            console.log(org_s_5_pos)
+            console.log(org_s_6_pos)
+            console.log(org_s_7_pos)
+            console.log(org_s_8_pos)
+            setTimeout(function(){
+                if( org_s_1_hei>0&&
+                    org_s_2_hei>0&&
+                    org_s_4_hei>0&&
+                    org_s_5_hei>0&&
+                    org_s_6_hei>0&&
+                    org_s_8_hei>0&&
+                    org_s_1_pos>0&&
+                    org_s_2_pos>0&&
+                    org_s_3_pos>0&&
+                    org_s_4_pos>0&&
+                    org_s_5_pos>0&&
+                    org_s_6_pos>0&&
+                    org_s_7_pos>0&&
+                    org_s_8_pos>0){
+                    $('body').css({'pointer-events':'auto'})
+                }else{
+                    start_in()
+                }
+
+            },300)
+        }
+        function getstart(e){
+            $('.animate').removeClass('animate')
+            if(pointerEventToXY(e)[1]<org_s_2_pos && pointerEventToXY(e)[1]>=0){
+                start = 1
+            }
+            if(pointerEventToXY(e)[1]<org_s_5_pos && pointerEventToXY(e)[1]>=org_s_2_pos){
+                start = 2
+            }
+            if(pointerEventToXY(e)[1]<org_s_6_pos && pointerEventToXY(e)[1]>=org_s_5_pos){
+                start = 3
+            }
+            if(pointerEventToXY(e)[1]<org_s_8_pos && pointerEventToXY(e)[1]>=org_s_6_pos){
+                start = 4
+            }
+            if(pointerEventToXY(e)[0]<w/3){
+                ratio_l = 1.2-((pointerEventToXY(e)[0])/(w/3))/5
+                ratio_r = 1
+            }else if(pointerEventToXY(e)[0]>(w/3)*2){
+                ratio_r = 1.2-((w-pointerEventToXY(e)[0])/(w/3))/5
+                ratio_l = 1
+            }else{
+                ratio_r = 1
+                ratio_l = 1
+            }
+        }
+        $('body').on('mousedown touchstart', function(e){
+            getstart(e)
+            if(typeof start === 'undefined'){
+                getstart(e)
+            }
+        })
+        function getTanFromDegrees(degrees) {
+          return Math.tan(degrees * Math.PI/180);
+        }
+        $('body').on('mousemove touchmove', function(e){
+            pointerEventToXY(e)
+            if(init[0] == 0 || init[1] == 0){
+                init = pointerEventToXY(e)
+            }
+            var diffY = pointerEventToXY(e)[1]-init[1]
+            var diffX = pointerEventToXY(e)[0]-init[0]
+
+                $('.face_subwrap_r').css({'transform':'scaleY('+ratio_r+')'}) 
+                $('.face_subwrap_l').css({'transform':'scaleY('+ratio_l+')'}) 
+            if(start == 1){
+                if($('.face_wrap').outerHeight()<h){
+                    $('.face_l.face_1').css({'height':(org_s_1_hei+diffY)})
+                    $('.face_r.face_1').css({'height':(org_s_1_hei+diffY)})
+                }else{
+                    $('.face_l.face_1').css({'height':(org_s_1_hei+diffY)})
+                    $('.face_l.face_2').css({'height':($('.face_2').outerHeight() - ($('.face_wrap').outerHeight()-h)/5)})
+                    $('.face_l.face_4').css({'height':($('.face_4').outerHeight() - ($('.face_wrap').outerHeight()-h)/5)})
+                    $('.face_l.face_5').css({'height':($('.face_5').outerHeight() - ($('.face_wrap').outerHeight()-h)/5)})
+                    $('.face_l.face_6').css({'height':($('.face_6').outerHeight() - ($('.face_wrap').outerHeight()-h)/5)})
+                    $('.face_l.face_8').css({'height':($('.face_8').outerHeight() - ($('.face_wrap').outerHeight()-h)/5)})
+                    $('.face_r.face_1').css({'height':(org_s_1_hei+diffY)})
+                    $('.face_r.face_2').css({'height':($('.face_2').outerHeight() - ($('.face_wrap').outerHeight()-h)/5)})
+                    $('.face_r.face_4').css({'height':($('.face_4').outerHeight() - ($('.face_wrap').outerHeight()-h)/5)})
+                    $('.face_r.face_5').css({'height':($('.face_5').outerHeight() - ($('.face_wrap').outerHeight()-h)/5)})
+                    $('.face_r.face_6').css({'height':($('.face_6').outerHeight() - ($('.face_wrap').outerHeight()-h)/5)})
+                    $('.face_r.face_8').css({'height':($('.face_8').outerHeight() - ($('.face_wrap').outerHeight()-h)/5)})
+                }
+            }
+            if(start == 2){
+                    $('.face_l.face_1').css({'height':(org_s_1_hei-(diffY*0.2))})
+                    $('.face_l.face_3').css({'height':(diffY+(diffY*0.2)+(diffY*0.3))})
+                    $('.face_l.face_5').css({'height':(org_s_5_hei-(diffY*0.3))})
+                    $('.face_r.face_1').css({'height':(org_s_1_hei-(diffY*0.2))})
+                    $('.face_r.face_3').css({'height':(diffY+(diffY*0.2)+(diffY*0.3))})
+                    $('.face_r.face_5').css({'height':(org_s_5_hei-(diffY*0.3))})
+
+                var skewed = (diffY+(diffY*0.2)+(diffY*0.4))/(getTanFromDegrees(90-(diffX/5)))
+                    $('.face_3').css({'transform':'skew('+diffX/5+'deg)'})
+                    $('.face_4').css({'transform':'translateX('+skewed+'px)'})
+                    $('.face_5').css({'transform':'skew('+((Math.atan2((org_s_5_hei-(diffY*0.3)),skewed)*180/Math.PI)-90)+'deg)'})
+
+                if($('.face_wrap').outerHeight()<h){
+                }else if($('.face_8').outerHeight()>10){
+                    $('.face_l.face_8').css({'height':($('.face_8').outerHeight()-($('.face_wrap').outerHeight()-h))})
+                    $('.face_r.face_8').css({'height':($('.face_8').outerHeight()-($('.face_wrap').outerHeight()-h))})
+                }else if($('.face_6').outerHeight()>10 + (w/100*3.7)){
+                    $('.face_l.face_6').css({'height':($('.face_6').outerHeight()-($('.face_wrap').outerHeight()-h))})
+                    $('.face_r.face_6').css({'height':($('.face_6').outerHeight()-($('.face_wrap').outerHeight()-h))})
+                }
+    $('.face_4.face_l').css({'background-position':'0px '+(-1*((diffY+(diffY*0.2)+(diffY*0.3))))+'px'})
+    $('.face_4.face_r').css({'background-position':'-50vw '+(-1*((diffY+(diffY*0.2)+(diffY*0.3))))+'px'})
+            }
+            if(start == 3){
+                console.log('sdl;fkj')
+                    $('.face_l.face_1').css({'height':(org_s_1_hei-(diffY*0.2))})
+                    $('.face_l.face_3').css({'height':((diffY*0.8)+(diffY*0.2))})
+                    $('.face_l.face_5').css({'height':(org_s_5_hei+(diffY*0.2))})
+                    $('.face_r.face_1').css({'height':(org_s_1_hei-(diffY*0.2))})
+                    $('.face_r.face_3').css({'height':((diffY*0.8)+(diffY*0.2))})
+                    $('.face_r.face_5').css({'height':(org_s_5_hei+(diffY*0.2))})
+
+                var skewed = ((diffY*0.8)+(diffY*0.2))/(getTanFromDegrees(90-(diffX/5)))
+                    $('.face_3').css({'transform':'skew('+diffX/5+'deg)'})
+                    $('.face_4').css({'transform':'translateX('+skewed+'px)'})
+                    $('.face_5').css({'transform':'skew('+((Math.atan2((org_s_5_hei+(diffY*0.2)),skewed)*180/Math.PI)-90)+'deg)'})
+
+                if($('.face_wrap').outerHeight()<h){
+                }else if($('.face_8').outerHeight()>10){
+                    $('.face_l.face_8').css({'height':($('.face_8').outerHeight()-($('.face_wrap').outerHeight()-h))})
+                    $('.face_r.face_8').css({'height':($('.face_8').outerHeight()-($('.face_wrap').outerHeight()-h))})
+                }else if($('.face_6').outerHeight()>10 + (w/100*3.7)){
+                    $('.face_l.face_6').css({'height':($('.face_6').outerHeight()-($('.face_wrap').outerHeight()-h))})
+                    $('.face_r.face_6').css({'height':($('.face_6').outerHeight()-($('.face_wrap').outerHeight()-h))})
+                }
+    $('.face_4.face_l').css({'background-position':'0px '+(-1*((diffY*0.8)+(diffY*0.2)))+'px'})
+    $('.face_4.face_r').css({'background-position':'-50vw '+(-1*((diffY*0.8)+(diffY*0.2)))+'px'})
+            }
+            if(start == 4){
+                var skewed_1 = (diffY/4+(diffY*0.1))/(getTanFromDegrees(90-(diffX/5)))
+                var skewed_2 = ((diffY/4)*3+(diffY*0.3))/(getTanFromDegrees(90-(diffX/5)))
+                    $('.face_3').css({'transform':'skew('+diffX/5+'deg)'})
+                    $('.face_4').css({'transform':'translateX('+skewed_1+'px)'})
+                    $('.face_5').css({'transform':'skew('+((Math.atan2((org_s_5_hei-(diffY*0.2)),skewed_1)*180/Math.PI)-90)+'deg)'})
+                    $('.face_7').css({'transform':'skew('+diffX/5+'deg)'})
+                    $('.face_8').css({'transform':'translateX('+skewed_2+'px)'})
+
+                if($('.face_wrap').outerHeight()<h){
+                    $('.face_l.face_1').css({'height':(org_s_1_hei-(diffY*0.2))})
+                    $('.face_l.face_3').css({'height':(diffY/4+(diffY*0.1))})
+                    $('.face_l.face_5').css({'height':(org_s_5_hei-(diffY*0.2))})
+                    $('.face_l.face_7').css({'height':((diffY/4)*3+(diffY*0.3))})
+                    $('.face_r.face_1').css({'height':(org_s_1_hei-(diffY*0.2))})
+                    $('.face_r.face_3').css({'height':(diffY/4+(diffY*0.1))})
+                    $('.face_r.face_5').css({'height':(org_s_5_hei-(diffY*0.2))})
+                    $('.face_r.face_7').css({'height':((diffY/4)*3+(diffY*0.3))})
+                }
+    $('.face_4.face_l').css({'background-position':'0px '+(-1*(diffY/4+(diffY*0.1)))+'px'})
+    $('.face_4.face_r').css({'background-position':'-50vw '+(-1*(diffY/4+(diffY*0.1)))+'px'})
+    $('.face_8.face_l').css({'background-position':'0px '+(-1*(((diffY/4)*3+(diffY*0.3))))+'px'})
+    $('.face_8.face_r').css({'background-position':'-50vw '+(-1*(((diffY/4)*3+(diffY*0.3))))+'px'})
+    // $('.face_8').css({'background-position':})
+            }
+            ydiffY = pointerEventToXY(e)[1]
+            $('.face_subwrap_r .grad_top_b').css({'top':$('.face_subwrap_r .face_5').offset().top})
+            $('.face_subwrap_l .grad_top_b').css({'top':$('.face_subwrap_l .face_5').offset().top})
+        })
+        $('body').on('mouseup touchend', function(e){
+                $('.face_subwrap_r').css({'transform':'scaleY(1)'}) 
+                $('.face_subwrap_l').css({'transform':'scaleY(1)'}) 
+            init[0] = 0,
+            init[1] = 0
+            jQuery.easing.def = 'easeOutBounce';
+                    $('.face_3').css({'transform':'skew(0deg)'})
+                    $('.face_4').css({'transform':'translateX(0px)'})
+                    $('.face_5').css({'transform':'skew(0deg)'})
+                    $('.face_7').css({'transform':'skew(0deg)'})
+                    $('.face_8').css({'transform':'translateX(0px)'})
+                    $('.face_1').css({'height':org_s_1_hei}, 100)
+                    $('.face_2').css({'height':org_s_2_hei}, 100)
+                    $('.face_3').css({'height':0}          , 100)
+                    $('.face_4').css({'height':org_s_4_hei}, 100)
+                    $('.face_5').css({'height':org_s_5_hei}, 100)
+                    $('.face_6').css({'height':org_s_6_hei}, 100)
+                    $('.face_7').css({'height':0}          , 100)
+                    $('.face_8').css({'height':org_s_8_hei}, 100)
+                    $('.face_4').addClass('animate')
+                    $('.face_8').addClass('animate')
+                    $('.face_3').addClass('animate')
+                    $('.face_7').addClass('animate')
+            // $('.face_subwrap_r .grad_top_b').css({'top':$('.face_subwrap_r .face_4').offset().top})
+            // $('.face_subwrap_l .grad_top_b').css({'top':$('.face_subwrap_l .face_4').offset().top})
+        })
+        // h - 795*unit
+        // $('face_inner_wrap').outerHeight()
+        function pointerEventToXY(e){
+            var value = [0,0]
+              if(e.type == 'touchstart' || e.type == 'touchmove' || e.type == 'touchend' || e.type == 'touchcancel'){
+                var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
+                value[0] = touch.pageX;
+                value[1] = touch.pageY;
+              } else if (e.type == 'mousedown' || e.type == 'mouseup' || e.type == 'mousemove' || e.type == 'mouseover'|| e.type=='mouseout' || e.type=='mouseenter' || e.type=='mouseleave') {
+                value[0] = e.pageX;
+                value[1] = e.pageY;
+              }
+              return value
+        };
+    })
+</script>
+<div class="face_wrap">
+<div class="face_subwrap face_subwrap_l">
+    <div class="grad_top"></div>
+    <img src="pic/scan161/n_1.png"   class="face face_1 face_l">
+    <img src="pic/scan161/n_2.png"   class="face face_2 face_l">
+    <img src="pic/scan161/n_2_m.png" class="face face_3 face_l">
+    <img src="pic/scan161/n_3.png"   class="face face_4 face_l">
+    <!-- <div class="grad_top grad_top_b"></div> -->
+    <div class="face face_5 face_l">
+        <div class="grad_top"></div>
+        <img src="pic/scan161/n_1.png">
+    </div>
+    <img src="pic/scan161/n_2.png"   class="face face_6 face_l">
+    <img src="pic/scan161/n_2_m.png" class="face face_7 face_l">
+    <img src="pic/scan161/n_3.png"   class="face face_8 face_l">
+</div>
+<div class="face_subwrap face_subwrap_r">
+    <div class="grad_top"></div>
+    <img src="pic/scan161/n_1.png"   class="face face_1 face_r">
+    <img src="pic/scan161/n_2.png"   class="face face_2 face_r">
+    <img src="pic/scan161/n_2_m.png" class="face face_3 face_r">
+    <img src="pic/scan161/n_3.png"   class="face face_4 face_r">
+    <!-- <div class="grad_top grad_top_b"></div> -->
+    <div class="face face_5 face_r">
+        <div class="grad_top"></div>
+        <img src="pic/scan161/n_1.png">
+    </div>
+    <img src="pic/scan161/n_2.png"   class="face face_6 face_r">
+    <img src="pic/scan161/n_2_m.png" class="face face_7 face_r">
+
+    <img src="pic/scan161/n_3.png"   class="face face_8 face_r">
+</div>
+</div>
+</body>
+</html>

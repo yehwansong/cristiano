@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8">
+<meta 
+     name='viewport' 
+     content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' 
+/>
+<script
+src="https://code.jquery.com/jquery-3.4.1.js"
+integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+crossorigin="anonymous"></script>
+<script src="perfect-scrollbar.js"></script>
+<script src="jquery.waitforimages.js"></script>
+<link rel="stylesheet" href="https://use.typekit.net/ryv0hyv.css">
+<style type="text/css">
+	*{margin:0;
+		padding: 0;
+		box-sizing: border-box;
+		font-size: 0;
+
+font-family: neuzeit-grotesk, sans-serif;
+
+font-weight: 400;
+
+font-style: normal;
+	}
+	body,html{
+		width: 100vw;
+		height: 100%;
+		overflow:hidden;
+	}
+	body{
+    background: linear-gradient(#b9b9b9 20%,#0a0a0a);
+	}
+	.right img{
+		transform: rotate();
+	}
+	.cat{
+		width: 20vw !important;
+		position: fixed;
+		height: 100vh;
+		top: 45vw;
+		transform: translateX(-50%);
+	}
+	.elem{
+		height: 200vh;
+	    width: 50%;
+	    position: absolute;
+	    overflow-y: hidden;
+	    background: #8c8c8c6b;
+	    box-shadow: inset 0vh 0vh 1vh black, 10vh 10vh 1vh #5858586b;
+	}
+	.left{
+		left: 0
+	}
+	.right{
+		right: 0
+	}
+	.bottom_left{
+	    transform: rotate(45deg);
+	    transform-origin: left top;
+	    left: 0;
+	    top: calc(25vw - 10vw);
+	    width: 70.7%;
+	    box-shadow: inset 0vh 0vh 1vh black, -10vh 10vh 1vh #5858586b;
+	}
+	.bottom_left>img{
+		top: -100%
+	}
+	.bottom_right{
+	    transform: rotate(-45deg);
+	    transform-origin: right top;
+	    right: 0;
+	    top: calc(25vw - 10vw);
+	    width: 70.7%;
+	    box-shadow: inset 0vh 0vh 1vh black, 10vh 10vh 1vh #5858586b;
+	}
+	.bottom_right>img{
+		top: -100%
+	}
+	.top_left{
+	    transform: rotate(45deg) translateY(-56.6vw);
+	    height: 55vw;
+	    transform-origin: left top;
+	    left: 0;
+	    top: calc(25vw - 10vw);
+	    width: 70.7%;
+	    box-shadow: inset 0vh 0vh 1vh black, 10vh 10vh 1vh #5858586b;
+	}
+	.top_right{
+    	transform: rotate(-45deg) translateY(-56.6vw);
+    	height: 55vw;
+    	transform-origin: right top;
+    	right: 0;
+    	top: calc(25vw - 10vw);
+    	width: 70.7%;
+	    box-shadow: inset 0vh 0vh 1vh black, -10vh 10vh 1vh #5858586b;
+	}
+	img{
+		width: 100%
+	}
+	.right{
+	    transform: skewY(-45deg);
+	    transform-origin: left;
+	}
+	.left{
+	    transform: skewY(45deg);
+	    transform-origin: right;
+	}
+.cat_1{
+    left: 80vw;
+    z-index: 10;
+    width: 20vw;
+    top: 20vw;
+}
+.cat_2{
+    left: 50vw;
+    width: 23vw;
+    height: 40vw;
+    z-index: 13;
+}
+.cat_3{
+    left: 20vw;
+    width: 16vw;
+    height: 53vh;
+    z-index: 8;
+    top: 20vw;
+}
+.cat_4{
+    left: 4vw;
+    width: 28vw;
+    height: 53vh;
+    z-index: 8;
+}
+.scroll_wrapper{
+	width: 100vw;
+	height: 100%;
+	overflow-y: hidden;
+	display: flex;
+	z-index: 0
+}
+.scroll{
+	position: relative; 
+	/*background: linear-gradient(to bottom, black, white);*/
+	height: 10000px;
+	width: 100%
+}
+.scroll_wrapper{
+	width: 100vw;
+    height: 100%;
+    position: absolute;
+    z-index: 100000;
+}
+.cloned{
+    z-index: 1000000 !important;
+    pointer-events: none;
+}
+.cloned .elem{
+    z-index: 1000000 !important;
+    pointer-events: all !important;
+    cursor: pointer;
+    color: white;
+    font-size: 1vw;
+    text-transform: uppercase;
+    mix-blend-mode: color-dodge;
+}
+.top{
+	/*background:red;*/
+    height: 10vw;
+    transform: translateY(-150%) translateX(50%) rotate(45deg) scale(1.414);
+    box-shadow: inset 0vh 0vh 0.5vh white
+}
+.cloned .top{
+	background:none;
+}
+.cloned .top:hover{
+    background: #8c8c8ce8;
+}
+.text{
+    /* transform: rotate(45deg) translateY(-55vw); */
+    /* height: 55vw; */
+    transform-origin: left top;
+    left: -20vw;
+    top: 0;
+    width: 24vw;
+    position: absolute;
+    color: black;
+    font-size: 2vh;
+    opacity: 1;
+    z-index: 10000;
+    background: white;
+    padding: 1vw;
+}
+.dia_1{
+    width: 5vw;
+    transform: rotate(45deg);
+    transform-origin: top left;
+    left: 70vw;
+    position: absolute;
+    top: 0px;
+    filter: invert(1);
+    z-index: 10
+}
+.dia_1 img{
+    transform: rotate(-45deg);
+    margin-bottom: 10vw;
+    box-shadow: -3vw 3vw 1vw #656565, 0vw 0vw 0.5vw #005aff;
+}
+.dia_2{
+    width: 7.5vw;
+    transform: rotate(-45deg);
+    transform-origin: top left;
+    left: 20vw;
+    position: absolute;
+    top: 0px;
+    filter: invert(1);
+}
+.dia_2 img{
+    transform: rotate(-45deg);
+    margin-bottom: 10vw;
+    box-shadow: -3vw 3vw 1vw #656565, 0vw 0vw 0.5vw #ff0000;
+}
+.popup{
+    z-index: 10000000;
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow:hidden;
+    background: black;
+    display: none;
+    padding: 5px;
+    box-sizing: border-box;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.popup_title{
+    position: relative;
+    color: white;
+    display: block;
+    /* height: 30vh; */
+    font-size: 20px;
+    line-height: 1.1;
+    text-align: center;
+    text-transform: uppercase;
+    display: inline-block;
+}
+.popup_text{
+    position: relative;
+    color: white;
+    display: block;
+    /* height: 30vh; */
+    font-size: 20px;
+    line-height: 1.1;
+    margin-bottom: 10px;
+}
+.popup_img img{
+	height: 90vh;
+	margin-bottom: 10vh;
+	width: auto;
+	left: 50%;
+	transform: translateX(-50%) !important;
+	position: relative;
+	display: block;
+}
+.popup_close{
+    position: fixed;
+    right: 5px;
+    top: 5px;
+    display: block;
+    z-index: 10000000000;
+    /* display: none; */
+    background: white;
+    box-shadow: 0px 0px 0px 5px white;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+.popup_close:hover{
+	filter: invert(1);
+}
+.img{
+	width: 100%;
+	height: 10vw;
+	position: absolute;
+	left: 0;
+	background-size: contain;
+	background-color: black;
+	background-position: top;
+	background-repeat: no-repeat;
+}
+.img_1{top: 00vw}
+.img_2{top: 10vw}
+.img_3{top: 20vw}
+.img_4{top: 30vw}
+.img_5{top: 40vw}
+.img_6{top: 50vw}
+.img_7{top: 60vw}
+.img_8{top: 70vw}
+.img_9{top: 80vw}
+.img_10{top: 90vw}
+.img_11{top: 100vw}
+.img_12{top: 110vw}
+.img_13{top: 120vw}
+.img_14{top: 130vw}
+.img_15{top: 140vw}
+.img_16{top: 150vw}
+.img_17{top: 160vw}
+.img_18{top: 170vw}
+.img_19{top: 180vw}
+.img_20{top: 190vw}
+.img_21{top: 200vw}
+.img_22{top: 210vw}
+.img_23{top: 220vw}
+.img_24{top: 230vw}
+.img_25{top: 240vw}
+.img_26{top: 250vw}
+.img_27{top: 260vw}
+.img_28{top: 270vw}
+.img_29{top: 280vw}
+.img_30{top: 290vw}
+.img_31{top: 300vw}
+.img_32{top: 310vw}
+.img_33{top: 320vw}
+.img_34{top: 330vw}
+.img_35{top: 340vw}
+.img_36{top: 350vw}
+.img_37{top: 360vw}
+.img_38{top: 370vw}
+.img_39{top: 380vw}
+.img_40{top: 390vw}
+.img_41{top: 400vw}
+.img_42{top: 410vw}
+.img_43{top: 420vw}
+.img_44{top: 430vw}
+.img_45{top: 440vw}
+.img_46{top: 450vw}
+.img_47{top: 460vw}
+.img_48{top: 470vw}
+.img_49{top: 480vw}
+.img_50{top: 490vw}
+.img_51{top: 500vw}
+.img_52{top: 510vw}
+.img_53{top: 520vw}
+.img_54{top: 530vw}
+.img_55{top: 540vw}
+.img_56{top: 550vw}
+.img_57{top: 560vw}
+.img_58{top: 570vw}
+.img_59{top: 580vw}
+.img_60{top: 590vw}
+.img_61{top: 600vw}
+.img_62{top: 610vw}
+.img_63{top: 620vw}
+.img_64{top: 630vw}
+.img_65{top: 640vw}
+.img_66{top: 650vw}
+.img_67{top: 660vw}
+.img_68{top: 670vw}
+.img_69{top: 680vw}
+.img_70{top: 690vw}
+.img_71{top: 700vw}
+.img_72{top: 710vw}
+.img_73{top: 720vw}
+.img_74{top: 730vw}
+.img_75{top: 740vw}
+.img_76{top: 750vw}
+.img_77{top: 760vw}
+.img_78{top: 770vw}
+.img_79{top: 780vw}
+.img_80{top: 790vw}
+.img_81{top: 800vw}
+.img_82{top: 810vw}
+.img_83{top: 820vw}
+.img_84{top: 830vw}
+.img_85{top: 840vw}
+.img_86{top: 850vw}
+.img_87{top: 860vw}
+.img_88{top: 870vw}
+.img_89{top: 880vw}
+.img_90{top: 890vw}
+.img_91{top: 900vw}
+.img_92{top: 910vw}
+.img_93{top: 920vw}
+.img_94{top: 930vw}
+.img_95{top: 940vw}
+.img_96{top: 950vw}
+.img_97{top: 960vw}
+.img_98{top: 970vw}
+.img_99{top: 980vw}
+.img_100{top: 990vw}
+.img_101{top: 1000vw}
+.img_102{top: 1010vw}
+.img_103{top: 1020vw}
+.img_104{top: 1030vw}
+.img_105{top: 1040vw}
+.img_106{top: 1050vw}
+.img_107{top: 1060vw}
+.img_108{top: 1070vw}
+.img_109{top: 1080vw}
+.img_110{top: 1090vw}
+.img_111{top: 1100vw}
+.img_112{top: 1110vw}
+.img_113{top: 1120vw}
+.img_114{top: 1130vw}
+.img_115{top: 1140vw}
+.img_116{top: 1150vw}
+.img_117{top: 1160vw}
+.img_118{top: 1170vw}
+.img_119{top: 1180vw}
+.img_120{top: 1190vw}
+.img_121{top: 1200vw}
+.img_122{top: 1210vw}
+.img_123{top: 1220vw}
+.img_124{top: 1230vw}
+.img_125{top: 1240vw}
+.img_126{top: 1250vw}
+.img_127{top: 1260vw}
+.img_128{top: 1270vw}
+.img_129{top: 1280vw}
+.img_130{top: 1290vw}
+.img_131{top: 1300vw}
+.img_132{top: 1310vw}
+.img_133{top: 1320vw}
+.img_134{top: 1330vw}
+.img_135{top: 1340vw}
+.img_136{top: 1350vw}
+.img_137{top: 1360vw}
+.img_138{top: 1370vw}
+.img_139{top: 1380vw}
+.img_140{top: 1390vw}
+.img_141{top: 1400vw}
+.img_142{top: 1410vw}
+.img_143{top: 1420vw}
+.img_144{top: 1430vw}
+.img_145{top: 1440vw}
+.img_146{top: 1450vw}
+.img_147{top: 1460vw}
+.img_148{top: 1470vw}
+.img_149{top: 1480vw}
+.img_150{top: 1490vw}
+
+</style>
+</head>
+<body>
+	<script type="text/javascript">
+		var text = [
+		'FAKE #1 - THE ABSENCE\
+		The deaf noise of the socialmedialism thrills misery.\
+		The hate array, the dreams of profit spurts a modern ideology made of science and technology for a factory shaped city . The user worker. The content product\. Login.		 All in.\
+		Proletarian Romance.\
+		Life in sharing. Love by the hour. Idealism motel. Sexual class conflict. Moral hierarchy. Fast Sci-Fi. Internet Overdose. Gourmet overexposition. Speed \depression.\
+		Ethical inquisition. Wellness preservation. Right patrol. Afflicted soul.\
+		The information. The information. The information.\
+		Like. The new verbs of the power. To like. To be Liked. The followers. The swollowers. Mobile addiction.The window on the wall. The beginning of the century.\ 		Political correct. Business coma. Social Warming. Open Sea. Freedom breakdown. West civilization sunset. Block express. External Memory. Extra limb. Grim.\
+		Tough solutions required , the destruction of meaning.\
+		Emergency exit only.\
+		The Absence.',
+		'FACES, OVERDOSE OF EMOTIONS.\
+		PLACES OF TRAGEDY, GRACES.\
+		DOORS OF A VOID, DAZES.\
+		TRACES OF VIOLENCE, TRAPS OF SILENCE, RELIANCE.\
+		MAZES.',
+		'INTRZN\
+		INTRZN is a band  formed by Cristiano Feleppa Grimaldi and Nico Nightingale based in NYC. The partnership meshing a free style approach to melodies with cold\ rhythms. Their "Zone" quartet is a twilight of fluctuating moods. Percussion is bare, allowing bright bars to shine and darker moments to fester. Music which in one breath is elated and uplifting and, the next, dejected and downtrodden.\
+		he  first Ep ZONES is released on  Charlois Records.\
+		esign by'
+		]
+		var img_cat_1 = [
+				'zines/img6.png',
+				'zines/img1.jpg',
+				'zines/img2.png',
+				'zines/img3.png',
+				'zines/img4.png',
+				'zines/img5.png',
+				'zines/img7.png',
+				'zines/img8.png',
+				'zines/img9.png',
+				'zines/img10.png',
+				'zines/img11.png',
+				'zines/img12.png',
+				'zines/img13.png',
+				'zines/img14.png',
+				'zines/img15.png',
+				'zines/img16.png',
+				'zines/img17.jpg',
+				'zines/img18.jpg',
+				'zines/img19.jpg',
+				'zines/img20.jpg',
+				'zines/img21.jpg',
+				'zines/img22.jpg',
+				'zines/img23.jpg',
+				'zines/img24.jpg',
+				'zines/img25.jpg',
+				'zines/img26.jpg',
+				'zines/img27.jpg',
+				'zines/img28.jpg',
+				'zines/img29.jpg',
+				'zines/img30.jpg',
+				'zines/img31.jpg',
+				'zines/img32.jpg',
+				
+		]
+		var img_cat_2 = [
+						'music/img.jpg'
+		]
+		var img_cat_3 = [
+						'photography/img1.JPG',
+						'photography/img2.JPG',
+						'photography/img3.JPG',
+						'photography/img4.JPG',
+						'photography/img5.JPG',
+						'photography/img6.JPG',
+						'photography/img7.JPG',
+						'photography/img8.JPG',
+						'photography/img9.JPG',
+						'photography/img10.JPG',
+						'photography/img11.JPG'
+		]
+		$(document).ready(function(){
+			for (var i = 0; i < img_cat_1.length; i++) {
+				console.log($('.cat_1.original').find('.elem'))
+				$('.cat_1.original').find('.elem').append('<div class="img img_'+(i+1)+'" style="background-image:url('+img_cat_1[i]+')"></div>')
+			}
+			for (var i = 0; i < img_cat_2.length; i++) {
+				console.log($('.cat_2.original').find('.elem'))
+				$('.cat_2.original').find('.elem').append('<div class="img img_'+(i+1)+'" style="background-image:url('+img_cat_2[i]+')"></div>')
+			}
+			for (var i = 0; i < img_cat_3.length; i++) {
+				console.log($('.cat_3.original').find('.elem'))
+				$('.cat_3.original').find('.elem').append('<div class="img img_'+(i+1)+'" style="background-image:url('+img_cat_3[i]+')"></div>')
+			}
+			$('.dia_1').append("\
+				<img class='wait' src='photography/img1.JPG'>\
+				<img class='wait' src='photography/img2.JPG'>\
+				<img class='wait' src='zines/img27.jpg'>\
+				<img class='wait' src='zines/img28.jpg'>\
+				<img class='wait' src='zines/img29.jpg'>\
+				<img class='wait' src='zines/img3.png'>\
+				<img class='wait' src='zines/img4.png'>\
+				<img class='wait' src='photography/img1.JPG'>\
+				<img class='wait' src='photography/img2.JPG'>\
+				<img class='wait' src='zines/img27.jpg'>\
+				<img class='wait' src='zines/img28.jpg'>\
+				<img class='wait' src='zines/img29.jpg'>\
+				<img class='wait' src='zines/img3.png'>\
+				<img class='wait' src='zines/img4.png'>\
+				<img class='wait' src='photography/img1.JPG'>\
+				<img class='wait' src='photography/img2.JPG'>\
+				<img class='wait' src='zines/img27.jpg'>\
+				<img class='wait' src='zines/img28.jpg'>\
+				<img class='wait' src='zines/img29.jpg'>\
+				<img class='wait' src='zines/img3.png'>\
+				<img class='wait' src='zines/img4.png'>\
+				")
+			$('.dia_2').append("\
+				<img class='wait' src='photography/img1.JPG'>\
+				<img class='wait' src='photography/img2.JPG'>\
+				<img class='wait' src='zines/img27.jpg'>\
+				<img class='wait' src='zines/img28.jpg'>\
+				<img class='wait' src='zines/img29.jpg'>\
+				<img class='wait' src='zines/img3.png'>\
+				<img class='wait' src='zines/img4.png'>\
+				<img class='wait' src='photography/img1.JPG'>\
+				<img class='wait' src='photography/img2.JPG'>\
+				<img class='wait' src='zines/img27.jpg'>\
+				<img class='wait' src='zines/img28.jpg'>\
+				<img class='wait' src='zines/img29.jpg'>\
+				<img class='wait' src='zines/img3.png'>\
+				<img class='wait' src='zines/img4.png'>\
+				<img class='wait' src='photography/img1.JPG'>\
+				<img class='wait' src='photography/img2.JPG'>\
+				<img class='wait' src='zines/img27.jpg'>\
+				<img class='wait' src='zines/img28.jpg'>\
+				<img class='wait' src='zines/img29.jpg'>\
+				<img class='wait' src='zines/img3.png'>\
+				<img class='wait' src='zines/img4.png'>\
+				")
+			var scrollamount = 0
+			var scrollamount_prev = 0
+			$('.wait').waitForImages().done(function() {
+				$('.scroll_wrapper').perfectScrollbar();
+				var unit = parseInt($('.top_left').css('top').split('px')[0])
+				$('.scroll_wrapper').scroll(function(){
+					scrollamount = parseInt($('.ps-scrollbar-y-rail').css('top').split('px')[0],10)
+					var sel = Math.floor(scrollamount/(0.1*window.innerWidth))
+					console.log(sel)
+					if(scrollamount>scrollamount_prev){
+						// scrolldown
+						$('.cat_1.original').find('.img_'+sel).removeClass('img_'+sel).addClass('img_'+(sel+img_cat_1.length))
+						$('.cat_2.original').find('.img_'+sel).removeClass('img_'+sel).addClass('img_'+(sel+img_cat_2.length))
+						$('.cat_3.original').find('.img_'+sel).removeClass('img_'+sel).addClass('img_'+(sel+img_cat_3.length))
+					}else{
+						$('.cat_1.original').find('.img_'+(sel+img_cat_1.length)).removeClass('img_'+(sel+img_cat_1.length)).addClass('img_'+sel)
+						$('.cat_2.original').find('.img_'+(sel+img_cat_2.length)).removeClass('img_'+(sel+img_cat_2.length)).addClass('img_'+sel)
+						$('.cat_3.original').find('.img_'+(sel+img_cat_3.length)).removeClass('img_'+(sel+img_cat_3.length)).addClass('img_'+sel)
+					}
+					scrollamount_prev = scrollamount
+					$('.cat_1 .elem>.img').css({'transform':'translateY('+-1*scrollamount +'px)'})
+					$('.cat_2 .elem>.img').css({'transform':'translateY('+-1*scrollamount +'px)'})
+					$('.cat_3 .elem>.img').css({'transform':'translateY('+-1*scrollamount +'px)'})
+					$('.dia_1').css({'transform':'rotate(45deg) translateY('+-1*(scrollamount%$('.dia_1').outerHeight() - unit) +'px)'})
+					$('.dia_2').css({'transform':'rotate(-45deg) translateY('+-1*(scrollamount%$('.dia_2').outerHeight() - unit) +'px)'})
+				})
+			});
+			$('.cloned').find('.elem.top').click(function(){
+				$('.popup').perfectScrollbar();
+				$('.popup').fadeIn(300)
+				var category = $(this).parent().attr('class').split('cat_')[1].split(' ')[0]
+				$('.popup_title').text($(this).text());
+				$('.popup_text').html(text[category-1]);
+				$('.original.cat_'+category).find('.left').children().each(function(){
+					$('.popup_img').append($(this).clone())
+				})
+			})
+			$('.popup_close').click(function(){
+				$('.popup').fadeOut(300)
+				$('.popup_title').text('');
+				$('.popup_text').html('');
+				$('.popup_img').empty()
+			})
+			
+		})
+	</script>
+	<div class="scroll_wrapper">
+		<div class="scroll"></div>
+	</div>
+	<div class="dia_2">
+	</div>
+	<div class="cat cat_1 original">
+		<div class="elem top">FAKE</div>
+		<div class="elem top_left"></div>
+		<div class="elem top_right"></div>
+		<div class="elem left"></div>
+		<div class="elem bottom_left"></div>
+		<div class="elem right"></div>
+		<div class="elem bottom_right"></div>
+	</div>
+	<div class="cat cat_2 original">
+		<div class="elem top">FAKE</div>
+		<div class="elem left"></div>
+		<div class="elem bottom_left"></div>
+		<div class="elem right"></div>
+		<div class="elem bottom_right"></div>
+	</div>
+	<div class="cat cat_3 original">
+		<div class="elem top">FAKE</div>
+		<div class="elem top_left"></div>
+		<div class="elem top_right"></div>
+		<div class="elem left"></div>
+		<div class="elem bottom_left"></div>
+		<div class="elem right"></div>
+		<div class="elem bottom_right"></div>
+	</div>
+	<div class="cat cat_1 cloned">
+		<div class="elem top">FAKE</div>
+	</div>
+	<div class="cat cat_2 cloned">
+		<div class="elem top">Photography</div>
+	</div>
+	<div class="cat cat_3 cloned">
+		<div class="elem top">Zines</div>
+	</div>
+	<div class="dia_1">
+	</div>
+	<div class="popup">
+		<img src="img/close.png" class="popup_close">
+		<div class="popup_title"></div>
+		<div class="popup_text"></div>
+		<div class="popup_img"></div>
+	</div>
+</body>
+</html>
